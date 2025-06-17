@@ -24,14 +24,17 @@ class WorkflowExecutionService:
         self.active_executions: Dict[str, Any] = {}
         self.browser_session: Optional[BrowserSession] = None
         logger.info("WorkflowExecutionService initialized")
-        self.llm = ChatOpenAI(
-            model="gpt-4.1",
-            openai_api_key=os.getenv('OPENAI_API_KEY'),
-            temperature=0.1,
-            max_tokens=None,
-            timeout=None,
-            max_retries=2,
-        )
+        api_key = os.getenv("OPENAI_API_KEY")
+        self.llm = None
+        if api_key:
+            self.llm = ChatOpenAI(
+                model="gpt-4.1",
+                openai_api_key=api_key,
+                temperature=0.1,
+                max_tokens=None,
+                timeout=None,
+                max_retries=2,
+            )
     
     async def start_browser_session(self, headless: bool = False):
         """Start a shared browser session if not already running."""

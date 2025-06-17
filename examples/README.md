@@ -73,6 +73,19 @@ python example_frame_extraction.py ../sample_form_filling.mp4 --mode gemini
 - Computer vision analysis
 - AI-powered action detection
 
+### `slot_machine_wallet_tracker.py`
+Extract wallet and bet values from a slot machine video and save the results to a CSV file.
+
+```bash
+cd examples
+python slot_machine_wallet_tracker.py my_slot_video.mp4
+```
+
+**Features shown:**
+- OCR-based text extraction
+- Wallet tracking after each spin
+- CSV reporting of balance and bet amounts
+
 ## Sample Data
 
 ### `sample_form_filling.mp4`

@@ -21,15 +21,17 @@ class WorkflowGenerationService:
     def __init__(self, config: VideoAnalysisConfig):
         self.config = config
         logger.info("WorkflowGenerationService initialized")
-        api_key = os.getenv('GOOGLE_API_KEY')
-        self.llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-pro",
-            google_api_key=api_key,
-            temperature=0.1,
-            max_tokens=None,
-            timeout=None,
-            max_retries=2,
-        )
+        api_key = os.getenv("GOOGLE_API_KEY")
+        self.llm = None
+        if api_key:
+            self.llm = ChatGoogleGenerativeAI(
+                model="gemini-1.5-pro",
+                google_api_key=api_key,
+                temperature=0.1,
+                max_tokens=None,
+                timeout=None,
+                max_retries=2,
+            )
     
     async def convert_actions_to_structured_output(
         self, actions, start_url: Optional[str] = None
